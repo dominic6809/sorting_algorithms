@@ -14,13 +14,13 @@ void counting_sort(int *array, size_t size)
 {
 	int *count;
 	int *sorted;
-	int x;
+	int x, max;
 
 	if (array == NULL || size < 2)
 		return;
 
 	/* Find the maximum value in the array */
-	int max = array[0];
+	max = array[0];
 
 	for (x = 1; x < (int)size; x++)
 	{
