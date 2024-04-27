@@ -17,22 +17,22 @@ void sift_down(int *array, size_t size, size_t start, size_t end)
 {
 	size_t left, right, largest;
 
-	left = 2 * end + 1;
-	right = 2 * end + 2;
-	largest = end;
+	left = 2 * start + 1;
+	right = 2 * start + 2;
+	largest = start;
 
-	if (left < start && array[left] > array[largest])
+	if (left < end && array[left] > array[largest])
 	largest = left;
 
-	if (right < start && array[right] > array[largest])
+	if (right < end && array[right] > array[largest])
 	largest = right;
 
-	if (largest != end)
+	if (largest != start)
 	{
 	/* Swap elements directly without a separate swap function*/
-	int tmp = array[end];
+	int tmp = array[start];
 
-	array[end] = array[largest];
+	array[start] = array[largest];
 	array[largest] = tmp;
 
 	print_array(array, size);
