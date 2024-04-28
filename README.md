@@ -41,3 +41,6 @@ gcc -Wall -Wextra -Werror -pedantic 0-bubble_sort.c -o bubble_sort
 
 ## Credits
 This project is part of the Holberton School curriculum, and the sorting algorithm implementations are based on the teachings and resources provided by the school.
+
+## Colaborators
+- Joshua Oseghale [Github](https://github.com/JentleJoe)
