@@ -52,43 +52,22 @@ void counting_sort(int *array, size_t size)
 		return;
 	}
 
-	i = 0;
-	while (i < (max + 1))
-	{
+	for (i = 0; i < (max + 1); i++)
 		count[i] = 0;
-		i++;
-	}
-
-	i = 0;
-	while (i < (int)size)
-	{
+	for (i = 0; i < (int)size; i++)
 		count[array[i]] += 1;
-		i++;
-	}
-
-	i = 1;
-	while (i < (max + 1))
-	{
+	for (i = 0; i < (max + 1); i++)
 		count[i] += count[i - 1];
-		i++;
-	}
-
 	print_array(count, max + 1);
 
-	i = size - 1;
-	while (i >= 0)
+	for (i = 0; i < (int)size; i++)
 	{
 		sorted[count[array[i]] - 1] = array[i];
 		count[array[i]] -= 1;
-		i--;
 	}
 
-	i = 0;
-	while (i < (int)size)
-	{
+	for (i = 0; i < (int)size; i++)
 		array[i] = sorted[i];
-		i++;
-	}
 
 	free(sorted);
 	free(count);
