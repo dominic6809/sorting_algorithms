@@ -1,42 +1,50 @@
 #include "sort.h"
 
-void sift_down(int *array, size_t size, size_t start, size_t end);
+void max_heapify(int *array, size_t size, size_t base, size_t root);
 void heap_sort(int *array, size_t size);
+void swap_ints(int *x, int *y);
 
 /**
- * sift_down - Perform the sift-down operation on the heap
- * @array: The array representing the heap
- * @size: Size of the heap
- * @start: Index of the root node of the heap
- * @end: Index of the last node of the heap
- *
- * Description: This function performs the sift-down operation
+  * swap_ints - Swap two integers in an array.
+ * @x: The first integer to swap.
+ * @y: The second integer to swap.
+ * Description: This function performs the swap_ints operation
  * on the heap to maintain the heap property.
  */
-void sift_down(int *array, size_t size, size_t start, size_t end)
+void swap_ints(int *x, int *y)
 {
-	size_t left, right, largest;
+	int tmp;
+
+	tmp = *x;
+	*x = *y;
+	*y = tmp;
+}
+
+/**
+ * max_heapify - Turn a binary tree into a complete binary heap.
+ * @array: An array of integers representing a binary tree.
+ * @size: The size of the array/tree.
+ * @base: The index of the base row of the tree.
+ * @end: The root node of the binary tree.
+ */
+void max_heapify(int *array, size_t size, size_t base, size_t end)
+{
+	size_t left, right, large;
 
 	left = 2 * end + 1;
 	right = 2 * end + 2;
-	largest = end;
+	large = end;
 
-	if (left < start && array[left] > array[largest])
-	largest = left;
+	if (left < base && array[left] > array[large])
+		large = left;
+	if (right < base && array[right] > array[large])
+		large = right;
 
-	if (right < start && array[right] > array[largest])
-	largest = right;
-
-	if (largest != end)
+	if (large != end)
 	{
-	/* Swap elements directly without a separate swap function*/
-	int tmp = array[end];
-
-	array[end] = array[largest];
-	array[largest] = tmp;
-
-	print_array(array, size);
-	sift_down(array, size, start, largest);
+		swap_ints(array + end, array + large);
+		print_array(array, size);
+		max_heapify(array, size, base, large);
 	}
 }
 
@@ -58,17 +66,12 @@ void heap_sort(int *array, size_t size)
 	return;
 
 	for (i = size / 2 - 1; i >= 0; i--)
-	sift_down(array, size, size, i);
+	max_heapify(array, size, size, i);
 
 	for (i = size - 1; i > 0; i--)
 	{
-	/* Swap elements directly without a separate swap function*/
-	int tmp = array[0];
-
-	array[0] = array[i];
-	array[i] = tmp;
-
-	print_array(array, size);
-	sift_down(array, size, i, 0);
+		swap_ints(array, array + i);
+		print_array(array, size);
+		max_heapify(array, size, i, 0);
 	}
 }
